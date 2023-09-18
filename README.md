@@ -1,4 +1,4 @@
-# flutter_student_info_getx_form
+# Flutter Student Information Form Using GetX
 
 A new Flutter project.
 
