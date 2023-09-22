@@ -12,29 +12,32 @@ class SectionHeading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveLayout(
-      mobile: Text(
-        sectionText,
-        style: const TextStyle(
-          fontSize: 25,
-          fontWeight: FontWeight.bold,
-          color: Color(0xff5e0495),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: ResponsiveLayout(
+        mobile: Text(
+          sectionText,
+          style: const TextStyle(
+            fontSize: 21,
+            fontWeight: FontWeight.bold,
+            color: Color(0xff5e0495),
+          ),
         ),
-      ),
-      tablet: Text(
-        sectionText,
-        style: const TextStyle(
-          fontSize: 25,
-          fontWeight: FontWeight.bold,
-          color: Color(0xff5e0495),
+        tablet: Text(
+          sectionText,
+          style: const TextStyle(
+            fontSize: 21,
+            fontWeight: FontWeight.bold,
+            color: Color(0xff5e0495),
+          ),
         ),
-      ),
-      desktop: Text(
-        sectionText,
-        style: const TextStyle(
-          fontSize: 25,
-          fontWeight: FontWeight.bold,
-          color: Color(0xff5e0495),
+        desktop: Text(
+          sectionText,
+          style: const TextStyle(
+            fontSize: 21,
+            fontWeight: FontWeight.bold,
+            color: Color(0xff5e0495),
+          ),
         ),
       ),
     );

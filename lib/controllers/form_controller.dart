@@ -1,28 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class FormController extends GetxController {
   // form key
   final GlobalKey<FormState> studentInformationForm = GlobalKey<FormState>();
 
-  // text controllers
-  late TextEditingController firstNameController;
-  late TextEditingController lastNameController;
+  // Personal Information Section Text Controllers
+  late TextEditingController nameController;
   late TextEditingController dobController;
   late TextEditingController ageController;
-  late TextEditingController fatherNameController;
+
+  // Contact Information Section Text Controllers
   late TextEditingController emailController;
+  late TextEditingController phoneNumberController;
+  late TextEditingController addressController;
+  late TextEditingController postalCodeController;
+
+  // Education Information Text Controllers
+  late TextEditingController highSchoolController;
+  late TextEditingController collegeController;
+
+  late TextEditingController fatherNameController;
 
   // we can also check for password if it is valid or not
   late TextEditingController passwordController;
 
   // variables to store the value
-  var firstName = '';
-  var lastName = '';
+  var name = '';
   var dob = '';
   var age = '';
-  var fatherName = '';
+
+  var selectedDate = DateTime.now().obs;
+  RxBool isDatePickedBoolean = false.obs;
+
   var email = '';
+  var phoneNumber = '';
+  var address = '';
+  var postalCode = '';
+
+  var highSchool = '';
+  var college = '';
+
+  var fatherName = '';
 
   // store password in a variable
   var password = '';
@@ -32,12 +52,19 @@ class FormController extends GetxController {
   void onInit() {
     super.onInit();
 
-    firstNameController = TextEditingController();
-    lastNameController = TextEditingController();
+    nameController = TextEditingController();
     dobController = TextEditingController();
     ageController = TextEditingController();
-    fatherNameController = TextEditingController();
+
     emailController = TextEditingController();
+    phoneNumberController = TextEditingController();
+    addressController = TextEditingController();
+    postalCodeController = TextEditingController();
+
+    highSchoolController = TextEditingController();
+    collegeController = TextEditingController();
+
+    fatherNameController = TextEditingController();
 
     // we also have to initialize the password controller
     passwordController = TextEditingController();
@@ -48,12 +75,18 @@ class FormController extends GetxController {
   void onClose() {
     super.onClose();
 
-    firstNameController.dispose();
-    lastNameController.dispose();
+    nameController.dispose();
     dobController.dispose();
     ageController.dispose();
-    fatherNameController.dispose();
+
     emailController.dispose();
+    postalCodeController.dispose();
+    phoneNumberController.dispose();
+
+    highSchoolController.dispose();
+    collegeController.dispose();
+
+    fatherNameController.dispose();
 
     // we also have to dispose the password controller
     passwordController.dispose();
@@ -67,9 +100,19 @@ class FormController extends GetxController {
     return null;
   }
 
-  String? validateFirstNameAndFatherName(String value) {
+  // validate first name, father's name, high school name, college name
+  String? validateEmptyFields(String value) {
     if (value.isEmpty) {
       return "Field should not be empty";
+    }
+
+    return null;
+  }
+
+  // validate postal code
+  String? validatePostalCode(String value) {
+    if (value.length < 5) {
+      return "Enter Correct Postal Code";
     }
 
     return null;
@@ -82,6 +125,40 @@ class FormController extends GetxController {
     }
 
     return null;
+  }
+
+  String? validatePhoneNumber(String value) {
+    if (!GetUtils.isPhoneNumber(value)) {
+      return "Phone number not valid";
+    }
+
+    return null;
+  }
+
+  // pick date
+  pickDate() async {
+    DateTime? pickedDate = await showDatePicker(
+      context: Get.context!,
+      initialDate: selectedDate.value,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2024),
+      initialEntryMode: DatePickerEntryMode.input,
+      cancelText: 'Cancel',
+      confirmText: 'Confirm',
+    );
+
+    if (pickedDate != null && pickedDate != selectedDate) {
+      selectedDate.value = pickedDate;
+      isDatePickedBoolean.value = true;
+    }
+  }
+
+  isDatePicked() {
+    if (isDatePickedBoolean.value) {
+      return DateFormat("dd-MM-yyyy").format(selectedDate.value);
+    } else {
+      return '';
+    }
   }
 
   // validate the form
