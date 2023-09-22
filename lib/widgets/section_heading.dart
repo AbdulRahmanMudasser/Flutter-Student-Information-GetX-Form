@@ -22,6 +22,8 @@ class SectionHeading extends StatelessWidget {
             fontWeight: FontWeight.bold,
             color: Color(0xff5e0495),
           ),
+          softWrap: true,
+          overflow: TextOverflow.ellipsis,
         ),
         tablet: Text(
           sectionText,
@@ -30,6 +32,8 @@ class SectionHeading extends StatelessWidget {
             fontWeight: FontWeight.bold,
             color: Color(0xff5e0495),
           ),
+          softWrap: true,
+          overflow: TextOverflow.ellipsis,
         ),
         desktop: Text(
           sectionText,
@@ -38,6 +42,8 @@ class SectionHeading extends StatelessWidget {
             fontWeight: FontWeight.bold,
             color: Color(0xff5e0495),
           ),
+          softWrap: true,
+          overflow: TextOverflow.ellipsis,
         ),
       ),
     );

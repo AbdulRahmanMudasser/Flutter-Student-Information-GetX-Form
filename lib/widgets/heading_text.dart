@@ -18,6 +18,8 @@ class HeadingText extends StatelessWidget {
           fontWeight: FontWeight.w500,
           color: Color(0xff5e0495),
         ),
+        softWrap: true,
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }

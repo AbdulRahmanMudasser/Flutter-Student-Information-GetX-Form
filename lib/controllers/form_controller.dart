@@ -6,20 +6,20 @@ class FormController extends GetxController {
   // form key
   final GlobalKey<FormState> studentInformationForm = GlobalKey<FormState>();
 
-  // Personal Information Section Text Controllers
+  // Personal Information Section - Text Controllers
   late TextEditingController nameController;
   late TextEditingController dobController;
   late TextEditingController ageController;
 
-  // Contact Information Section Text Controllers
+  // Contact Information Section - Text Controllers
   late TextEditingController emailController;
   late TextEditingController phoneNumberController;
   late TextEditingController addressController;
   late TextEditingController postalCodeController;
 
-  // Education Information Text Controllers
-  late TextEditingController highSchoolController;
-  late TextEditingController collegeController;
+  // Education Information - Text Controllers
+  late TextEditingController institutionNameController;
+  late TextEditingController studentIdController;
 
   late TextEditingController fatherNameController;
 
@@ -39,13 +39,37 @@ class FormController extends GetxController {
   var address = '';
   var postalCode = '';
 
-  var highSchool = '';
-  var college = '';
+  var institutionName = '';
+  var studentId = '';
 
   var fatherName = '';
 
   // store password in a variable
   var password = '';
+
+  // selected value from fields of study drop down menu
+  var fieldsOfStudySelectedValue = 'Biology'.obs;
+
+  // selected value from year of study
+  var yearOfStudySelectedValue = 'Freshman'.obs;
+
+  // list of fields of study
+  List<String> fieldsOfStudyList = [
+    'Biology',
+    'Computer Science',
+    'Psychology',
+    'Business Administration',
+    'History',
+  ];
+
+  // list of year of study
+  List<String> yearOfStudyList = [
+    'Freshman',   // first year undergraduate student
+    'Sophomore',  // second year undergraduate student
+    'Junior',   // third year undergraduate student
+    'Senior',   // fourth year undergraduate student
+    'Graduate', // student pursuing a master
+  ];
 
   // initialize the controllers
   @override
@@ -61,8 +85,8 @@ class FormController extends GetxController {
     addressController = TextEditingController();
     postalCodeController = TextEditingController();
 
-    highSchoolController = TextEditingController();
-    collegeController = TextEditingController();
+    institutionNameController = TextEditingController();
+    studentIdController = TextEditingController();
 
     fatherNameController = TextEditingController();
 
@@ -83,8 +107,8 @@ class FormController extends GetxController {
     postalCodeController.dispose();
     phoneNumberController.dispose();
 
-    highSchoolController.dispose();
-    collegeController.dispose();
+    institutionNameController.dispose();
+    studentIdController.dispose();
 
     fatherNameController.dispose();
 
@@ -100,7 +124,7 @@ class FormController extends GetxController {
     return null;
   }
 
-  // validate first name, father's name, high school name, college name
+  // validate first name, father's name, college/university name
   String? validateEmptyFields(String value) {
     if (value.isEmpty) {
       return "Field should not be empty";
@@ -109,8 +133,8 @@ class FormController extends GetxController {
     return null;
   }
 
-  // validate postal code
-  String? validatePostalCode(String value) {
+  // validate length code
+  String? validateLength(String value) {
     if (value.length < 5) {
       return "Enter Correct Postal Code";
     }
@@ -153,12 +177,23 @@ class FormController extends GetxController {
     }
   }
 
+  // is date picked method
   isDatePicked() {
     if (isDatePickedBoolean.value) {
       return DateFormat("dd-MM-yyyy").format(selectedDate.value);
     } else {
       return '';
     }
+  }
+
+  // update the selected value of fields of study drop down menu
+  updateFieldsOfStudySelectedValue(String value) {
+    fieldsOfStudySelectedValue.value = value;
+  }
+
+  // update the selected value of yearof study drop down menu
+  updateYearOfStudySelectedValue(String value) {
+    yearOfStudySelectedValue.value = value;
   }
 
   // validate the form
