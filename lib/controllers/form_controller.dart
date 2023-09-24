@@ -53,6 +53,8 @@ class FormController extends GetxController {
   // selected value from year of study
   var yearOfStudySelectedValue = 'Freshman'.obs;
 
+  var checkboxSelected = false.obs;
+
   // list of fields of study
   List<String> fieldsOfStudyList = [
     'Biology',
@@ -64,12 +66,31 @@ class FormController extends GetxController {
 
   // list of year of study
   List<String> yearOfStudyList = [
-    'Freshman',   // first year undergraduate student
-    'Sophomore',  // second year undergraduate student
-    'Junior',   // third year undergraduate student
-    'Senior',   // fourth year undergraduate student
+    'Freshman', // first year undergraduate student
+    'Sophomore', // second year undergraduate student
+    'Junior', // third year undergraduate student
+    'Senior', // fourth year undergraduate student
     'Graduate', // student pursuing a master
   ];
+
+  // list of programming languages skills
+  RxList<String> programmingSkills = ["Dart", "Python", "JavaScript"].obs;
+
+  // list of skills got in programming languages
+  RxList<bool> gotAnyProgrammingSkills = [false, false, false].obs;
+
+  // list of technical works
+  RxList<String> technicalSkills =
+      ["Mobile App Development", "Data Analysis", "Web Development"].obs;
+
+  // list of skills got in technical works
+  RxList<bool> gotAnyTechnicalSkill = [false, false, false].obs;
+
+  // list of technical works
+  RxList<String> softSkills = ["Communication", "Problem Solving", "Leadership"].obs;
+
+  // list of skills got in technical works
+  RxList<bool> gotAnySoftSkill = [false, false, false].obs;
 
   // initialize the controllers
   @override
@@ -191,9 +212,14 @@ class FormController extends GetxController {
     fieldsOfStudySelectedValue.value = value;
   }
 
-  // update the selected value of yearof study drop down menu
+  // update the selected value of year of study drop down menu
   updateYearOfStudySelectedValue(String value) {
     yearOfStudySelectedValue.value = value;
+  }
+
+  // update programming skills
+  void updateSkills(list, index) {
+    list[index] = !list[index];
   }
 
   // validate the form

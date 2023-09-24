@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_student_info_getx_form/config/responsive/app_size.dart';
 import 'package:flutter_student_info_getx_form/controllers/form_controller.dart';
+import 'package:flutter_student_info_getx_form/widgets/sections/skills%20section/skills_section.dart';
 import 'package:get/get.dart';
 
 import '../widgets/custom_button.dart';
-import '../widgets/custom_text_field.dart';
-import '../widgets/heading_text.dart';
-import '../widgets/section_heading.dart';
 import '../widgets/sections/contact information section/contact_information_section.dart';
 import '../widgets/sections/educational information section/educational_information_section.dart';
-import '../widgets/sections/emergency contact information section/emergency_contact_information_section.dart';
 import '../widgets/sections/personal information section/personal_information_section.dart';
 import '../widgets/sections/top section/top_section.dart';
 
@@ -29,8 +26,7 @@ class FormScreen extends GetView<FormController> {
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           width: context.width,
           height: context.height,
-          child: Obx(
-            () => SingleChildScrollView(
+          child:SingleChildScrollView(
               child: Form(
                 key: controller.studentInformationForm,
                 child: Column(
@@ -65,11 +61,17 @@ class FormScreen extends GetView<FormController> {
 
                     const SizedBox(height: 30),
 
-                    // Emergency Contact Information Section
-                    EmergencyContactInformationSection(
-                      sectionHeading: "Emergency Contact Information",
+                    // Skills Section
+                    SkillsSection(
+                      sectionHeading: "Skills",
                       controller: controller,
                     ),
+
+                    // Emergency Contact Information Section
+                    // EmergencyContactInformationSection(
+                    //   sectionHeading: "Emergency Contact Information",
+                    //   controller: controller,
+                    // ),
 
                     const SizedBox(height: 25),
 
@@ -84,7 +86,6 @@ class FormScreen extends GetView<FormController> {
                 ),
               ),
             ),
-          ),
         ),
       ),
     );

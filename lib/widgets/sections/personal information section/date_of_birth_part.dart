@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../controllers/form_controller.dart';
 import '../../custom_text_field.dart';
@@ -16,32 +17,36 @@ class DOBPart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        HeadingText(headingText: heading),
-
-        // date of birth text field
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
+    return Obx(
+      () {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              flex: 3,
-              child: CustomTextField(
-                hintText: controller.isDatePicked(),
-                readOnly: true,
-              ),
+            HeadingText(headingText: heading),
+
+            // date of birth text field
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: CustomTextField(
+                    hintText: controller.isDatePicked(),
+                    readOnly: true,
+                  ),
+                ),
+                Expanded(
+                  child: IconButton(
+                    icon: const Icon(Icons.calendar_today),
+                    onPressed: () => controller.pickDate(),
+                  ),
+                )
+              ],
             ),
-            Expanded(
-              child: IconButton(
-                icon: const Icon(Icons.calendar_today),
-                onPressed: () => controller.pickDate(),
-              ),
-            )
           ],
-        ),
-      ],
+        );
+      },
     );
   }
 }
