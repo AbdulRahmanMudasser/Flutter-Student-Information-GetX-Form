@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_student_info_getx_form/controllers/data_controller.dart';
+import 'package:flutter_student_info_getx_form/screens/data_screen.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class FormController extends GetxController {
   // form key
   final GlobalKey<FormState> studentInformationForm = GlobalKey<FormState>();
+
+  // instance of data controller
+  final DataController dataController = Get.find<DataController>();
 
   // Personal Information Section - Text Controllers
   late TextEditingController nameController;
@@ -31,7 +36,9 @@ class FormController extends GetxController {
   var dob = '';
   var age = '';
 
-  var selectedDate = DateTime.now().obs;
+  var selectedDate = DateTime
+      .now()
+      .obs;
   RxBool isDatePickedBoolean = false.obs;
 
   var email = '';
@@ -157,7 +164,7 @@ class FormController extends GetxController {
   // validate length code
   String? validateLength(String value) {
     if (value.length < 5) {
-      return "Enter Correct Postal Code";
+      return "Length cannot be less than 5 digits";
     }
 
     return null;
@@ -231,5 +238,9 @@ class FormController extends GetxController {
     }
 
     studentInformationForm.currentState!.save();
+
+    dataController.onSubmit();
+
+    Get.to(DataScreen());
   }
 }

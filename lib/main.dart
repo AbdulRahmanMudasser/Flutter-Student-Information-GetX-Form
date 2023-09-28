@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_student_info_getx_form/bindings/form_bindings.dart';
+import 'package:flutter_student_info_getx_form/screens/data_screen.dart';
 import 'package:flutter_student_info_getx_form/screens/form_screen.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,8 +20,13 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         textTheme: GoogleFonts.mooliTextTheme()
       ),
+      initialRoute: '/form',
+      getPages: [
+        GetPage(name: '/form', page: () => const FormScreen()),
+        GetPage(name: '/data', page: () =>  DataScreen()), // Register DataScreen
+      ],
       debugShowCheckedModeBanner: false,
-      home:  FormScreen(),
+      home:  const FormScreen(),
       initialBinding: FormBinding(),
     );
   }
